@@ -1,4 +1,9 @@
-## http://conky.sourceforge.net/variables.html
+## Author: pepo
+## Date: April 19th, 2015
+## Type: conkyrc file
+## Based on files found on the net
+## Adapted for main PC
+## Find more on conky: http://conky.sourceforge.net/variables.html
 # Use Xft?
 use_xft yes
 xftfont OFL Sorts Mill Goudy:size=8
