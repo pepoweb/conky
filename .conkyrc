@@ -1,0 +1,149 @@
+## http://conky.sourceforge.net/variables.html
+# Use Xft?
+use_xft yes
+xftfont OFL Sorts Mill Goudy:size=8
+xftalpha 0.8
+text_buffer_size 2048
+
+# Update interval in seconds
+update_interval 0.8
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Create own window instead of using desktop (required in nautilus)
+own_window yes
+own_window_transparent yes
+#own_window_type override
+own_window_class conky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+background no
+
+# Use double buffering (reduces flicker, may not work for everyone)
+double_buffer yes
+
+# Minimum size of text area
+minimum_size 100 0
+maximum_width 140 0
+
+# Draw shades?
+draw_shades no
+
+# Draw outlines?
+draw_outline no
+
+# Draw borders around text
+draw_borders no
+
+# Stippled borders?
+stippled_borders 0
+
+# border margins
+border_inner_margin 10
+
+# border width
+border_width 3
+
+# Default colors and also border colors
+default_color white
+default_shade_color black
+default_outline_color black
+own_window_colour black
+color1 red
+
+# Text alignment, other possible values are commented
+#alignment top_left
+alignment top_right
+#alignment bottom_left
+#alignment bottom_right
+
+# Gap between borders of screen and text
+# same thing as passing -x at command line
+gap_x 10
+gap_y 10
+
+# Subtract file system buffers from used memory?
+no_buffers yes
+
+# set to yes if you want all text to be in uppercase
+uppercase yes
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 1
+
+# number of net samples to average
+# set to 1 to disable averaging
+net_avg_samples 2
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale yes
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+use_spacer none
+
+TEXT
+${font Goudy Bookletter 1911:style=Bold}${nodename}${font} ${hr 2}
+${voffset 2}${font StyleBats:size=8}${font} Kernel:  ${alignr}${kernel}
+${font StyleBats:size=8}${font} Uptime: ${alignr}${uptime}
+${voffset 2}${font StyleBats:size=8}${font} User: ${alignr}${user_names}
+${voffset 2}${font StyleBats:size=8}${font} ${desktop_name}
+${voffset 2}${font StyleBats:size=8}$nodename - $sysname $kernel
+
+${font Goudy Bookletter 1911:style=Bold}CPU/MEM${font} ${hr 2}
+${font StyleBats:size=8}             ${freq_g} GHZ
+${font StyleBats:size=8}${font}  CPU1: ${cpu cpu1}% ${alignr}  ${font StyleBats:size=8}${font}  CPU2: ${cpu cpu2}% ${alignr}
+${cpugraph cpu1 40,65}${alignr}${cpugraph cpu2 40,65}
+${font StyleBats:size=8}${font}  CPU3: ${cpu cpu3}% ${alignr}  ${font StyleBats:size=8}${font}  CPU4: ${cpu cpu4}% ${alignr}
+${cpugraph cpu3 40,65}${alignr}${cpugraph cpu4 40,65}
+Load       ${alignr}${loadavg}
+${loadgraph 40}
+${font StyleBats:size=8}${font} RAM: $memperc% ${alignr}${membar 8,60}
+${font StyleBats:size=8}${font} SWAP: $swapperc% ${alignr}${swapbar 8,60}
+#${font Webdings:size=8}${font} Bat.: ${battery_percent BAT0}% ${alignr}${battery_bar 8,60 BAT0}
+${font StyleBats:size=8}${font} Temp. CPU: ${alignr}${acpitemp}°C
+${font StyleBats:size=8}${font} Temp. HDD: ${alignr}${hddtemp}°C
+
+${font Goudy Bookletter 1911:style=Bold}HD${font} ${hr 2}
+${color2}Disk I/O ROOT:${alignr} ${diskio}
+${color2}Disk I/O USB:${alignr} ${diskio /dev/sdb}
+${diskiograph /dev/sda}
+${execpi 10 df | sed '/none/d' | sed 1d | cut -d% -f2 | while read line ;
+ do
+echo '${fs_bar 10,110 '$line'}  ${fs_free_perc '$line'}% ' 
+done }
+
+#${image ~/load.php -s 100x20 -f 10}${texeci 60 /usr/bin/wget -q http://nxs.cc/load.php -O ~/load.php}
+
+${font Goudy Bookletter 1911:style=Bold}LAN${font} ${hr 2}
+${voffset 6}${font PizzaDude Bullets:size=8}${font} up:${upspeed eth0} ${alignr}${upspeedgraph eth0 12,60 000000 000000}
+${voffset 4}${font PizzaDude Bullets:size=8}${font} do:${downspeed eth0} ${alignr}${downspeedgraph eth0 12,60 }
+${voffset 4}${font PizzaDude Bullets:size=8}${font} Upload: ${alignr}${totalup eth0}
+${voffset 4}${font PizzaDude Bullets:size=8}${font} Download: ${alignr}${totaldown eth0}
+#${voffset 4}${font PizzaDude Bullets:size=8}${font} Signal: ${alignr}${wireless_link_bar 12,60 wlan0}
+#${voffset 4}${font PizzaDude Bullets:size=8}${font} Rate AP: ${alignr}${wireless_bitrate wlan0}
+
+${voffset 4}${font PizzaDude Bullets:size=8}${font} Local Ip: ${alignr}${addr eth0}
+${voffset 4}${font PizzaDude Bullets:size=8}${font} Gw: ${alignr}${gw_ip eth0}
+${voffset 4}${font PizzaDude Bullets:size=8}${font} SSH : ${alignr}${tcp_portmon 22 22 rip 0}
+
+${font Goudy Bookletter 1911:style=Bold}PROCESSES${font} ${hr 2}
+NAME $alignr CPU
+${top name 1} $alignr  ${top cpu 1}
+${top name 2} $alignr  ${top cpu 2}
+${top name 3} $alignr  ${top cpu 3}
+${top name 4} $alignr  ${top cpu 4}
+${top name 5} $alignr  ${top cpu 5}
+
+#${font Goudy Bookletter 1911:style=Bold}WEATHER${font} ${hr 2}
+#Location: ${execi 3600 conkyForecast --location=berlin,de --datatype=CN}
+#Conditions: ${execi 3600 conkyForecast --location=SZXX0033 --datatype=CC}
+#${font ConkyWeather:size=36}${execi 3600 conkyForecast --location=SZXX0033 --datatype=WF}${font}
+#Temp: ${execi 3600 conkyForecast --location=SZXX0033 --datatype=HT}
+#Extended Forecast
+#${font ConkyWeather:size=36}${execi 3600 conkyForecast --startday=1 --endday=3 --location=SZXX0033 --datatype=WF}${font}
+#${execi 3600 conkyForecast --location=SZXX0033 --startday=1 --endday=3 --spaces=15 --datatype=HT}
+#${execi 3600 conkyForecast --location=SZXX0033 --startday=1 --endday=3 --spaces=5 --datatype=DW}
+
+
