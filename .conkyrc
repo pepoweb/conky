@@ -6,6 +6,7 @@
 ## Based on files found on the net
 ## Adapted for main PC
 ## Find more on conky: http://conky.sourceforge.net/variables.html
+## Rhythmbox client: https://www.systutorials.com/docs/linux/man/1-rhythmbox-client/
 ]]
 
 conky.config = {
@@ -110,4 +111,8 @@ ${voffset 2}Public IP: ${alignr}${exec sh ip.sh}
 Total${tab}${tab}v${totaldown wlp3s0}${alignr}^${totalup wlp3s0}
 Speed${tab}${tab}v${downspeed wlp3s0}${alignr}^${upspeed wlp3s0}
 ${downspeedgraph wlp3s0 40,300 FFFF00 FF0000}
+#
+${color}Rhythmbox${font} ${hr 2}
+${exec rhythmbox-client --print-playing-format %ta}${alignr}${exec rhythmbox-client --print-playing-format %tt}
+${exec rhythmbox-client --print-playing-format "%te/%td"}${alignr}${exec rhythmbox-client --print-playing-format %ay}
 ]]
