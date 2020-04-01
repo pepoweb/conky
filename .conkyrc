@@ -7,6 +7,7 @@
 ## Adapted for main PC
 ## Find more on conky: http://conky.sourceforge.net/variables.html
 ## Rhythmbox client: https://www.systutorials.com/docs/linux/man/1-rhythmbox-client/
+## Needs ip.sh script
 ]]
 
 conky.config = {
